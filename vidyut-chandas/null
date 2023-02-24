@@ -1,0 +1,83 @@
+warning: type `vrtta_data` should have an upper camel case name
+  --> vidyut-chandas/src/identify.rs:16:12
+   |
+16 | pub struct vrtta_data {
+   |            ^^^^^^^^^^ help: convert the identifier to upper camel case: `VrttaData`
+   |
+   = note: `#[warn(non_camel_case_types)]` on by default
+
+warning: type `vrtta` should have an upper camel case name
+  --> vidyut-chandas/src/identify.rs:23:8
+   |
+23 | struct vrtta {
+   |        ^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Vrtta`
+
+warning: unreachable pattern
+  --> vidyut-chandas/src/scheme.rs:29:13
+   |
+29 |             _ => '\n',
+   |             ^
+   |
+   = note: `#[warn(unreachable_patterns)]` on by default
+
+warning: field `comment` is never read
+  --> vidyut-chandas/src/identify.rs:18:5
+   |
+16 | pub struct vrtta_data {
+   |            ---------- field in this struct
+17 |     
+18 |     comment: Vec<String>,
+   |     ^^^^^^^
+   |
+   = note: `vrtta_data` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `hrasva` should have an upper case name
+  --> vidyut-chandas/src/format.rs:10:7
+   |
+10 | const hrasva: &str = "aiufx";
+   |       ^^^^^^ help: convert the identifier to upper case: `HRASVA`
+   |
+   = note: `#[warn(non_upper_case_globals)]` on by default
+
+warning: constant `dirgha` should have an upper case name
+  --> vidyut-chandas/src/format.rs:12:7
+   |
+12 | const dirgha: &str = "AIUeEoOFX";
+   |       ^^^^^^ help: convert the identifier to upper case: `DIRGHA`
+
+warning: constant `others` should have an upper case name
+  --> vidyut-chandas/src/format.rs:14:7
+   |
+14 | const others: &str = "MH";
+   |       ^^^^^^ help: convert the identifier to upper case: `OTHERS`
+
+warning: constant `hrasva` should have an upper case name
+ --> vidyut-chandas/src/scheme.rs:7:7
+  |
+7 | const hrasva: &str = "aiufx";
+  |       ^^^^^^ help: convert the identifier to upper case: `HRASVA`
+
+warning: constant `dirgha` should have an upper case name
+ --> vidyut-chandas/src/scheme.rs:9:7
+  |
+9 | const dirgha: &str = "AIUeEoOFX";
+  |       ^^^^^^ help: convert the identifier to upper case: `DIRGHA`
+
+warning: constant `others` should have an upper case name
+  --> vidyut-chandas/src/scheme.rs:13:7
+   |
+13 | const others: &str = "MH";
+   |       ^^^^^^ help: convert the identifier to upper case: `OTHERS`
+
+warning: function `is_HAL` should have a snake case name
+  --> vidyut-chandas/src/scheme.rs:78:8
+   |
+78 | pub fn is_HAL(c: Sound) -> bool {
+   |        ^^^^^^ help: convert the identifier to snake case: `is_hal`
+   |
+   = note: `#[warn(non_snake_case)]` on by default
+
+warning: `vidyut-chandas` (bin "vidyut-chandas") generated 11 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.05s
+     Running `/home/pradyumnamalladi/Desktop/vidyut/target/debug/vidyut-chandas`
