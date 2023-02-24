@@ -1,3 +1,17 @@
+SanskritMetresRust
+
+Attempt to make rust library for metrical analysis of sanskrit text for the vidyut / ambuda project. Not ready yet. In preliminary stages.
+
+Steps to use:
+1) Navigate to vidyut/vidyut-chandas/
+2) run the command in bash: cargo run 2>null
+
+Example usage:
+
+![image](https://user-images.githubusercontent.com/98510624/221282832-7c995dd9-6a86-4a88-a962-30469cfaa36d.png)
+
+
+
 <div align="center">
 <h1>विद्युत्</h1>
 </div>
