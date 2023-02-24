@@ -1,6 +1,6 @@
 SanskritMetresRust
 
-Attempt to make rust library for metrical analysis of sanskrit text for the vidyut / ambuda project. Not ready yet. In preliminary stages.
+Attempt to make rust library for metrical analysis of sanskrit text for the vidyut / ambuda project. Not ready yet. In preliminary stages. Only works for vrtta based metres with all four padas same and no flexibility for last syllable when it is supposed to be laghu.
 
 Steps to use:
 1) Navigate to vidyut/vidyut-chandas/
