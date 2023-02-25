@@ -4,7 +4,8 @@ Attempt to make rust library for metrical analysis of sanskrit text for the рд╡р
 
 Steps to use:
 1) Navigate to vidyut/vidyut-chandas/
-2) run the command in bash: cargo run 2>null
+2) The input text can be changed in main.rs file. Verse should be in slp1 encoding.
+3) run the command in bash: cargo run 2>null
 
 Example usage:
 
