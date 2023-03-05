@@ -50,44 +50,64 @@ pub fn read_json () -> vrtta_data {
 
 pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
     //// hardcoded to take only first pada (if all have equal length)
-    /// no flexibility for गन्ते also
+    //// no flexibility for गन्ते also
     if a.len() != s.len()/4 {
         false
     } else {
-        let mut cond = true;
         let mut gantE = false;
-        /// s[i].unwrap() gives svara of input string
-        /// a.chars().nth(i).unwrap() gives svara of scheme
-        for i in 0..s.len(){
-            let pada_length = s.len()/4;
-            if s[i].unwrap() != a.chars().nth(i%pada_length).unwrap() && i%pada_length != pada_length-1 {
-                cond = false;
+        let pada_len = s.len()/4;
+        //// Check except for the last syllable
+        for i in 0..s.len() {
+            // println!("{:?}", i);
+            let found = s[i].unwrap();
+            let expected = a.chars().nth(i%pada_len).unwrap();
+            if (i+1)%pada_len != 0 {
+                if found!=expected {
+                    return false;
+                }
+                // println!("{:?},{:?},{:?}",
+                //     found,
+                //     expected,
+                //     found == expected
+                // );
+            } else {
+                // println!();
             }
-            //// Return False
-            if !cond {
+        }
+        //// Now check if last syllable is laghu when it should be guru
+        for i in 0..4 {
+            let found = s[i*pada_len+pada_len-1].unwrap();
+            let expected = a.chars().last().unwrap();
+            println!("CHECKING FOR GANTE:");
+            println!("{:?},{:?}", found, expected);
+            if found == 'L' && expected == 'G' {
                 return false;
             }
-            //// Else check for गन्ते
-            //// (Last syllable being guru is allowed when it is laghu)
-            if cond {
-                for i in 0..4 {
-                    if s[i].unwrap() == 'L' && a.chars().nth(i%pada_length-1).unwrap() == 'L' {
-                        return false
-                    }
-                }
+            if found == 'G' && expected == 'L' {
                 gantE = true;
-            }
+            } 
         }
+
+        //// If gantE is true, print a warning message
         if gantE {
-            println!("The last syllable of one or more pAdas do not seem to match but it is allowed as per गन्ते rule!");
+            println!("The last syllable of one or more lines does not match this metre but this is allowed by गन्ते rule!");
         }
+
+        // for i in 0..s.len()/4 {
+        //     let found = s[i].unwrap();
+        //     let expected = a.chars().nth(i).unwrap();
+        //     if s[i].unwrap() != a.chars().nth(i).unwrap() {
+        //         return false;
+        //     }
+        // }
+
         return true;
     }
 }
 
 //// Function that takes the scheme as the input and returns 
-/// the name of the metre
-/// To do this it reads the JSON file through read_json()
+//// the name of the metre
+//// To do this it reads the JSON file through read_json()
 
 pub fn identify (s: &Vec::<Metre>) -> String {
     let vrtta_kosha: vrtta_data = read_json();
@@ -95,7 +115,7 @@ pub fn identify (s: &Vec::<Metre>) -> String {
         let ref metre_name = vrtta_kosha.metres[i].name;
         //// Find each pattern as a vector of strings. 
         //// Right now it is being stored as either 
-        /// 1) String or 2) List of Strings
+        //// 1) String or 2) List of Strings
         let mut vec = Vec::new();
         match &vrtta_kosha.metres[i].pattern {
             

@@ -13,50 +13,6 @@ warning: type `vrtta` should have an upper camel case name
 23 | struct vrtta {
    |        ^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Vrtta`
 
-warning: unused doc comment
-  --> vidyut-chandas/src/identify.rs:53:5
-   |
-53 |       /// no flexibility for गन्ते also
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-54 | /     if a.len() != s.len()/4 {
-55 | |         false
-56 | |     } else {
-57 | |         let mut cond = true;
-...  |
-84 | |         return true;
-85 | |     }
-   | |_____- rustdoc does not generate documentation for expressions
-   |
-   = help: use `//` for a plain comment
-   = note: `#[warn(unused_doc_comments)]` on by default
-
-warning: unused doc comment
-  --> vidyut-chandas/src/identify.rs:59:9
-   |
-59 | /         /// s[i].unwrap() gives svara of input string
-60 | |         /// a.chars().nth(i).unwrap() gives svara of scheme
-   | |___________________________________________________________^
-61 | /         for i in 0..s.len(){
-62 | |             let pada_length = s.len()/4;
-63 | |             if s[i].unwrap() != a.chars().nth(i%pada_length).unwrap() && i%pada_length != pada_length-1 {
-64 | |                 cond = false;
-...  |
-79 | |             }
-80 | |         }
-   | |_________- rustdoc does not generate documentation for expressions
-   |
-   = help: use `//` for a plain comment
-
-warning: unused doc comment
-  --> vidyut-chandas/src/identify.rs:98:9
-   |
-98 |         /// 1) String or 2) List of Strings
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-99 |         let mut vec = Vec::new();
-   |         ------------------------- rustdoc does not generate documentation for statements
-   |
-   = help: use `//` for a plain comment
-
 warning: field `comment` is never read
   --> vidyut-chandas/src/identify.rs:18:5
    |
@@ -98,11 +54,11 @@ warning: function `is_HAL` should have a snake case name
    = note: `#[warn(non_snake_case)]` on by default
 
 warning: variable `gantE` should have a snake case name
-  --> vidyut-chandas/src/identify.rs:58:17
+  --> vidyut-chandas/src/identify.rs:57:17
    |
-58 |         let mut gantE = false;
+57 |         let mut gantE = false;
    |                 ^^^^^ help: convert the identifier to snake case: `gant_e`
 
-warning: `vidyut-chandas` (bin "vidyut-chandas") generated 11 warnings
-    Finished dev [unoptimized + debuginfo] target(s) in 0.24s
+warning: `vidyut-chandas` (bin "vidyut-chandas") generated 8 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.23s
      Running `/home/pradyumnamalladi/Desktop/SanskritMetresRust/target/debug/vidyut-chandas`
