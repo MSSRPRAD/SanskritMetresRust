@@ -9,7 +9,8 @@ Steps to use:
 
 Example usage:
 
-![image](https://user-images.githubusercontent.com/98510624/221282832-7c995dd9-6a86-4a88-a962-30469cfaa36d.png)
+![image](https://user-images.githubusercontent.com/98510624/222967323-de7dd0af-a53f-4813-85eb-9a76644dcae1.png)
+
 
 
 <div align="center">
