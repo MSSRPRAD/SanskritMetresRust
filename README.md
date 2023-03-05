@@ -9,7 +9,10 @@ Steps to use:
 
 Example usage:
 
-![image](https://user-images.githubusercontent.com/98510624/222967323-de7dd0af-a53f-4813-85eb-9a76644dcae1.png)
+![image](https://user-images.githubusercontent.com/98510624/222984822-c5092da8-bc64-4d01-b691-2319a4757e90.png)
+
+Here the metre is not identified (wrongly) because the last syllable of 4th pada is L when it should be G. Maybe I should print an error message for these small errors....
+![image](https://user-images.githubusercontent.com/98510624/222984877-d7ebceec-e070-4635-b895-ea24244e9c1d.png)
 
 
 
