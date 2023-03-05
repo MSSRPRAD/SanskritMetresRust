@@ -1,3 +1,4 @@
+   Compiling vidyut-chandas v0.1.0 (/home/pradyumnamalladi/Desktop/SanskritMetresRust/vidyut-chandas)
 warning: type `vrtta_data` should have an upper camel case name
   --> vidyut-chandas/src/identify.rs:16:12
    |
@@ -103,5 +104,5 @@ warning: variable `gantE` should have a snake case name
    |                 ^^^^^ help: convert the identifier to snake case: `gant_e`
 
 warning: `vidyut-chandas` (bin "vidyut-chandas") generated 11 warnings
-    Finished dev [unoptimized + debuginfo] target(s) in 0.05s
+    Finished dev [unoptimized + debuginfo] target(s) in 0.24s
      Running `/home/pradyumnamalladi/Desktop/SanskritMetresRust/target/debug/vidyut-chandas`
