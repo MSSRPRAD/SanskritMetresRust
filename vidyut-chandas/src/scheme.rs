@@ -1,5 +1,6 @@
 //// Goal is to take an slp1 encoded sanskrit verse and extract the
 //// G-L pattern from it.
+
 use lazy_static::lazy_static;
 
 type Sound = char;
@@ -26,7 +27,6 @@ impl Metre {
         match *self {
             Metre::G => 'G',
             Metre::L => 'L',
-            _ => '\n',
         }
     }
 }

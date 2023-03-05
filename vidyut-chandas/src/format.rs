@@ -7,11 +7,11 @@ use lazy_static::lazy_static;
 
 type Sound = char;
 //hrasva Vowels
-const hrasva: &str = "aiufx";
+const HRASVA: &str = "aiufx";
 //dIrgha Vowels
-const dirgha: &str = "AIUeEoOFX";
+const DIRGHA: &str = "AIUeEoOFX";
 //Anusvara or Visarga
-const others: &str = "MH";
+const OTHERS: &str = "MH";
 
 #[derive(Debug)]
 
@@ -47,21 +47,21 @@ impl Set {
 
 pub fn is_hrasva(c: Sound) -> bool {
     lazy_static! {
-        static ref CHARS: Set = Set::from(hrasva);
+        static ref CHARS: Set = Set::from(HRASVA);
     }
     CHARS.contains(c)
 }
 
 pub fn is_dirgha(c: Sound) -> bool {
     lazy_static! {
-        static ref CHARS: Set = Set::from(dirgha);
+        static ref CHARS: Set = Set::from(DIRGHA);
     }
     CHARS.contains(c)
 }
 
 pub fn is_special(c: Sound) -> bool {
     lazy_static! {
-        static ref CHARS: Set = Set::from(others);
+        static ref CHARS: Set = Set::from(OTHERS);
     }
     CHARS.contains(c)
 }

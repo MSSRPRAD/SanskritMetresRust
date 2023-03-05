@@ -38,6 +38,6 @@ fn main(){
     println!("\n\nOutput Verse:\n{}\n", verse_formatted);
 
     //Read the JSON File and print the metre (if found)
-    println!("Metre Name:\n{:?}",identify::identify(&s));
-
+    println!("Metre Name:\n{}",identify::identify(&s));
+    
 }

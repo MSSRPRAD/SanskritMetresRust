@@ -1,18 +1,3 @@
-SanskritMetresRust
-
-Attempt to make rust library for metrical analysis of sanskrit text for the विद्युत् / अम्बुद project. Not ready yet. In preliminary stages. Basically it's hard coded to work for वृत्त based metres with all four पाद-s same and no flexibility for last syllable (गन्ते).
-
-Steps to use:
-1) Navigate to vidyut/vidyut-chandas/
-2) The input text can be changed in main.rs file. Verse should be in slp1 encoding.
-3) run the command in bash: cargo run 2>null
-
-Example usage:
-
-![image](https://user-images.githubusercontent.com/98510624/221282832-7c995dd9-6a86-4a88-a962-30469cfaa36d.png)
-
-
-
 <div align="center">
 <h1>विद्युत्</h1>
 </div>
