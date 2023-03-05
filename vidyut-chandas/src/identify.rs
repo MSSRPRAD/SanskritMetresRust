@@ -79,18 +79,29 @@ pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
             let found = s[i*pada_len+pada_len-1].unwrap();
             let expected = a.chars().last().unwrap();
             println!("CHECKING FOR GANTE:");
-            println!("{:?},{:?}", found, expected);
-            if found == 'L' && expected == 'G' {
-                return false;
-            }
-            if found == 'G' && expected == 'L' {
+            println!("{:?},{:?}, {}", found, expected, 
+            
+                match found==expected {
+                    true => String::from("SAME"),
+                    false => String::from("DIFFERENT"),
+                    _ => String::from("SOME ERROR HAPPENED!")
+                }
+        
+            );
+            // if found == 'L' && expected == 'G' {
+            //     return false;
+            // }
+            // if found == 'G' && expected == 'L' {
+            //     gantE = true;
+            // } 
+            if found != expected {
                 gantE = true;
-            } 
+            }
         }
 
         //// If gantE is true, print a warning message
         if gantE {
-            println!("The last syllable of one or more lines does not match this metre but this is allowed by गन्ते rule!");
+            println!("\n\nThe last syllable of one or more lines does not match this metre but some grammatical rules allow this!\n\n");
         }
 
         // for i in 0..s.len()/4 {
