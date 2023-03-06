@@ -10,7 +10,7 @@ Steps to use:
 Example usage:
 ![image](https://user-images.githubusercontent.com/98510624/223076581-c4a0aa42-8f70-475d-82b8-8ef8626ba517.png)
 
-Sama Vrtta Metres are also identified.
+Ardha Sama Vrtta Metres are also identified.
 ![image](https://user-images.githubusercontent.com/98510624/223076102-1d1ebb3e-aa4c-4d4d-9714-d4d7bf2be98f.png)
 
 <div align="center">
