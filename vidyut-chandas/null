@@ -13,6 +13,18 @@ warning: type `vrtta` should have an upper camel case name
 23 | struct vrtta {
    |        ^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Vrtta`
 
+warning: unused doc comment
+   --> vidyut-chandas/src/identify.rs:114:5
+    |
+114 | /     /// Make a function that identifies whether it is an ardha sama vrtta or sama vrtta
+115 | |     /// Based on result check whether it matches any from database.....
+    | |_______________________________________________________________________^
+116 |       return identify_Sama_Vrtta(a, s);
+    |       -------------------------------- rustdoc does not generate documentation for expressions
+    |
+    = help: use `//` for a plain comment
+    = note: `#[warn(unused_doc_comments)]` on by default
+
 warning: unreachable pattern
   --> vidyut-chandas/src/identify.rs:87:21
    |
@@ -20,6 +32,20 @@ warning: unreachable pattern
    |                     ^
    |
    = note: `#[warn(unreachable_patterns)]` on by default
+
+warning: unused variable: `a`
+   --> vidyut-chandas/src/identify.rs:106:34
+    |
+106 | pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+    |                                  ^ help: if this is intentional, prefix it with an underscore: `_a`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `s`
+   --> vidyut-chandas/src/identify.rs:106:46
+    |
+106 | pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+    |                                              ^ help: if this is intentional, prefix it with an underscore: `_s`
 
 warning: field `comment` is never read
   --> vidyut-chandas/src/identify.rs:18:5
@@ -32,6 +58,12 @@ warning: field `comment` is never read
    |
    = note: `vrtta_data` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
    = note: `#[warn(dead_code)]` on by default
+
+warning: function `identify_Ardha_Sama_Vrtta` is never used
+   --> vidyut-chandas/src/identify.rs:106:8
+    |
+106 | pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: constant `hrasva` should have an upper case name
  --> vidyut-chandas/src/scheme.rs:8:7
@@ -61,12 +93,24 @@ warning: function `is_HAL` should have a snake case name
    |
    = note: `#[warn(non_snake_case)]` on by default
 
+warning: function `identify_Sama_Vrtta` should have a snake case name
+  --> vidyut-chandas/src/identify.rs:51:8
+   |
+51 | pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+   |        ^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `identify_sama_vrtta`
+
 warning: variable `gantE` should have a snake case name
   --> vidyut-chandas/src/identify.rs:57:17
    |
 57 |         let mut gantE = false;
    |                 ^^^^^ help: convert the identifier to snake case: `gant_e`
 
-warning: `vidyut-chandas` (bin "vidyut-chandas") generated 9 warnings
-    Finished dev [unoptimized + debuginfo] target(s) in 0.80s
+warning: function `identify_Ardha_Sama_Vrtta` should have a snake case name
+   --> vidyut-chandas/src/identify.rs:106:8
+    |
+106 | pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `identify_ardha_sama_vrtta`
+
+warning: `vidyut-chandas` (bin "vidyut-chandas") generated 15 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.83s
      Running `/home/pradyumnamalladi/Desktop/SanskritMetresRust/target/debug/vidyut-chandas`
