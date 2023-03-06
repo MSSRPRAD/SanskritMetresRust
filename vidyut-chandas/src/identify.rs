@@ -115,7 +115,8 @@ pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
     
     match a.len(){
         2 => {
-            let mut exp_len = 0;
+            //// Check whether the lengths of input metre and data metre is same or not.
+            //// If not same return false
             if 2*a[0].len()+2*a[1].len() != s.len(){
                 return false;
             }
@@ -140,6 +141,12 @@ pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
             return true;
         },
         4 => {
+            //// Check whether the lengths of input metre and data metre is same or not.
+            //// If not same return false
+            if a[0].len()+a[1].len()+a[2].len()+a[3].len() != s.len(){
+                return false;
+            }
+
             for i in 0..a[0].len(){
                 if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
                     return false;
@@ -218,6 +225,7 @@ pub fn identify (s: &Vec::<Metre>) -> String {
                 //Match this vector of strings with the G-L scheme
                 if identify_Sama_Vrtta( &vec[0] , s ){
                     println!("The input metre is a sama-vrtta.....");
+                    println!("{:?}", vec);
                     return String::from(metre_name);
                 }
             }
