@@ -12,8 +12,7 @@ Example usage:
 ![image](https://user-images.githubusercontent.com/98510624/222984822-c5092da8-bc64-4d01-b691-2319a4757e90.png)
 
 Sama Vrtta Metres are also identified.
-![image](https://user-images.githubusercontent.com/98510624/223075146-538b3824-017f-496e-9282-7edf2f129240.png)
-
+![image](https://user-images.githubusercontent.com/98510624/223076102-1d1ebb3e-aa4c-4d4d-9714-d4d7bf2be98f.png)
 
 <div align="center">
 <h1>विद्युत्</h1>
