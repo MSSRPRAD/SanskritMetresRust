@@ -9,10 +9,8 @@ use crate::format::*;
 
 fn main(){
     //Input Verse in slp1 encoding
-    let mut verse: String = String::from("tasya sTitvA kaTam api puraH kOtukADAnahetor
-    antarbAzpaS ciram anucaro rAjarAjasya daDyO .
-    meGAloke Bavati suKino 'py anyaTAvftti cetaH
-    kaRWASlezapraRayini jane kiM punar dUrasaMsTe .. 3 ..");
+    let mut verse: String = String::from("asty uttarasyAM diSi devatAtmA himAlayo nAma nagADirAjaH .
+    pUrvAparO toyaniDI vigAhya sTitaH pfTivyA iva mAnadaRqaH ..");
 
     //Print the input verse
     println!("\nInput Verse:\n{:?}\n\n", verse);

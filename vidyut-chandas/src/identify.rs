@@ -48,7 +48,7 @@ pub fn read_json () -> vrtta_data {
 /// the first pattern string. So in effect it works only when all 4 padas
 /// have same pattern and गन्ते is ignored.
 
-pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
+pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
     //// hardcoded to take only first pada (if all have equal length)
     //// no flexibility for गन्ते also
     if a.len() != s.len()/4 {
@@ -79,30 +79,42 @@ pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
             let found = s[i*pada_len+pada_len-1].unwrap();
             let expected = a.chars().last().unwrap();
             println!("CHECKING FOR GANTE:");
-            println!("{:?},{:?}", found, expected);
-            if found == 'L' && expected == 'G' {
-                return false;
-            }
-            if found == 'G' && expected == 'L' {
+            println!("{:?},{:?}, {}", found, expected, 
+            
+                match found==expected {
+                    true => String::from("SAME"),
+                    false => String::from("DIFFERENT"),
+                    _ => String::from("SOME ERROR HAPPENED!")
+                }
+        
+            );
+            
+            if found != expected {
                 gantE = true;
-            } 
+            }
         }
 
         //// If gantE is true, print a warning message
         if gantE {
-            println!("The last syllable of one or more lines does not match this metre but this is allowed by गन्ते rule!");
+            println!("\n\nThe last syllable of one or more lines does not match this metre but some grammatical rules allow this!\n\n");
         }
-
-        // for i in 0..s.len()/4 {
-        //     let found = s[i].unwrap();
-        //     let expected = a.chars().nth(i).unwrap();
-        //     if s[i].unwrap() != a.chars().nth(i).unwrap() {
-        //         return false;
-        //     }
-        // }
 
         return true;
     }
+}
+
+pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+
+    return true;
+}
+
+
+pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
+    //// TODO:
+    /// Make a function that identifies whether it is an ardha sama vrtta or sama vrtta
+    /// Based on result check whether it matches any from database.....
+    return identify_Sama_Vrtta(a, s);
+
 }
 
 //// Function that takes the scheme as the input and returns 
