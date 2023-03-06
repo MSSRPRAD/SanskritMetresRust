@@ -138,6 +138,7 @@ pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
                     return false;
                 }
             }
+            //// Check for last syllable and print warning?
             return true;
         },
         4 => {
@@ -167,6 +168,7 @@ pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
                     return false;
                 }
             }
+            //// Check for last syllable and print warning?
             return true;
         },
         _ => {
