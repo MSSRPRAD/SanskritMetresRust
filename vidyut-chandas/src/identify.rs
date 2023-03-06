@@ -104,17 +104,21 @@ pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
 }
 
 pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
-
+    //// TODO:
+    //// Find algorithm to find if pattern if an Ardha Sama Vrtta
     return true;
 }
 
-
-pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
-    //// TODO:
-    /// Make a function that identifies whether it is an ardha sama vrtta or sama vrtta
-    /// Based on result check whether it matches any from database.....
-    return identify_Sama_Vrtta(a, s);
-
+pub fn is_Sama_Vrtta(s: &Vec::<Metre>) -> bool {
+    let pada_len = s.len()/4;
+    for i in 1..4 {
+        for j in 0..pada_len-1 {
+            if s[j].unwrap() != s[i*pada_len+j].unwrap() {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 //// Function that takes the scheme as the input and returns 
@@ -122,6 +126,11 @@ pub fn matches(a: &String, s: &Vec::<Metre>) -> bool {
 //// To do this it reads the JSON file through read_json()
 
 pub fn identify (s: &Vec::<Metre>) -> String {
+
+    if is_Sama_Vrtta(s){
+        println!("Input is a sama vRtta Metre!");
+    }
+
     let vrtta_kosha: vrtta_data = read_json();
     for i in 0..vrtta_kosha.metres.len(){
         let ref metre_name = vrtta_kosha.metres[i].name;
@@ -138,11 +147,22 @@ pub fn identify (s: &Vec::<Metre>) -> String {
                 vec = b.to_vec();
             },
         }
-
-        //Match this vector of strings with the G-L scheme
-        if matches( &vec[0] , s ){
-            return String::from(metre_name);
+        
+        //// If the input verse is a Sama_Vrtta, then check against pattern only if 
+        //// the pattern is also a Sama_Vrtta
+        
+        if is_Sama_Vrtta(s){
+            if vec.len() > 1 {
+                continue
+            } else {
+                //Match this vector of strings with the G-L scheme
+                if identify_Sama_Vrtta( &vec[0] , s ){
+                    return String::from(metre_name);
+                }
+            }
         }
+
+
 
     }
     //// If no Pattern found
