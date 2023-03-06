@@ -78,7 +78,7 @@ pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
         for i in 0..4 {
             let found = s[i*pada_len+pada_len-1].unwrap();
             let expected = a.chars().last().unwrap();
-            println!("CHECKING FOR GANTE:");
+            println!("CHECKING LAST SYLLABLE:");
             println!("{:?},{:?}, {}", found, expected, 
             
                 match found==expected {
@@ -103,10 +103,70 @@ pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
     }
 }
 
-pub fn identify_Ardha_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
+pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
     //// TODO:
     //// Find algorithm to find if pattern if an Ardha Sama Vrtta
-    return true;
+    //// Two cases arise: 
+    //// 1) a.len() = 2 
+    ////     Here we check if 1st, 3rd padas of input s are equal to a[0] and a[1] and
+    ////     if 2nd and 4rd padas of input s are equal to a[0] and a[1]
+    //// 2) a.len() = 4
+    ////     Here we check if 1st, 2nd, 3rd, 4th padas of input s are equal to a[0], a[1], a[2], a[3]
+    
+    match a.len(){
+        2 => {
+            let mut exp_len = 0;
+            if 2*a[0].len()+2*a[1].len() != s.len(){
+                return false;
+            }
+            //// Checking 1st, 3rd padas except for last syllable
+            for i in 0..a[0].len()-1 {
+                if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
+                    return false;
+                }
+                if a[0].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()].unwrap() {
+                    return false;
+                }
+            }
+            //// Checking 2nd, 4th padas except for last syllable
+            for i in 0..a[1].len()-1 {
+                if a[1].chars().nth(i).unwrap() != s[i+a[0].len()].unwrap() {
+                    return false;
+                }
+                if a[1].chars().nth(i).unwrap() != s[i + 2*a[0].len()+a[1].len()].unwrap() {
+                    return false;
+                }
+            }
+            return true;
+        },
+        4 => {
+            for i in 0..a[0].len(){
+                if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
+                    return false;
+                }
+            }
+            for i in 0..a[1].len(){
+                if a[1].chars().nth(i).unwrap() != s[i + a[0].len()].unwrap() {
+                    return false;
+                }
+            }
+            for i in 0..a[2].len(){
+                if a[2].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()].unwrap() {
+                    return false;
+                }
+            }
+            for i in 0..a[3].len(){
+                if a[3].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()+a[2].len()].unwrap() {
+                    return false;
+                }
+            }
+            return true;
+        },
+        _ => {
+            // println!("Some Error Occured! {:?}", a);
+        }
+    }
+    return false;
 }
 
 pub fn is_Sama_Vrtta(s: &Vec::<Metre>) -> bool {
@@ -147,7 +207,7 @@ pub fn identify (s: &Vec::<Metre>) -> String {
                 vec = b.to_vec();
             },
         }
-        
+
         //// If the input verse is a Sama_Vrtta, then check against pattern only if 
         //// the pattern is also a Sama_Vrtta
         
@@ -157,12 +217,18 @@ pub fn identify (s: &Vec::<Metre>) -> String {
             } else {
                 //Match this vector of strings with the G-L scheme
                 if identify_Sama_Vrtta( &vec[0] , s ){
+                    println!("The input metre is a sama-vrtta.....");
                     return String::from(metre_name);
                 }
             }
+        } else {
+            // println!("Checking for ardha sama vrtta");
+            if identify_Ardha_Sama_Vrtta(&vec, s){
+                println!("The input metre is an ardha-sama-vrtta.....");
+                println!("{:?}", vec);
+                return String::from(metre_name);
+            }
         }
-
-
 
     }
     //// If no Pattern found
