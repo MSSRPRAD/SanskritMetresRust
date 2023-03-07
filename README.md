@@ -19,7 +19,7 @@ Identifies the closest metre (per levenshtein distance) to the input scheme. Ign
 same length as the input (So mistakes like mistyping a vowel will give bad output).
 
 Ex1)
-[Screenshot from 2023-03-07 16-33-25](https://user-images.githubusercontent.com/98510624/223408365-ed02be60-d1d3-46f4-9dad-09f64223e805.png)
+![Screenshot from 2023-03-07 16-33-25](https://user-images.githubusercontent.com/98510624/223408683-c908b7b5-bdfc-4941-8ec7-dd4e02b82bf7.png)
 
 
 Ex2)
