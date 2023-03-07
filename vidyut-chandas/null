@@ -1,71 +1,48 @@
    Compiling vidyut-chandas v0.1.0 (/home/pradyumnamalladi/Desktop/SanskritMetresRust/vidyut-chandas)
-warning: type `vrtta_data` should have an upper camel case name
-  --> vidyut-chandas/src/identify.rs:19:12
-   |
-19 | pub struct vrtta_data {
-   |            ^^^^^^^^^^ help: convert the identifier to upper camel case: `VrttaData`
-   |
-   = note: `#[warn(non_camel_case_types)]` on by default
-
-warning: type `vrtta` should have an upper camel case name
-  --> vidyut-chandas/src/identify.rs:26:8
-   |
-26 | struct vrtta {
-   |        ^^^^^ help: convert the identifier to upper camel case (notice the capitalization): `Vrtta`
-
 warning: unreachable pattern
-  --> vidyut-chandas/src/identify.rs:87:21
+  --> vidyut-chandas/src/identify.rs:86:21
    |
-87 |                     _ => String::from("SOME ERROR HAPPENED!")
+86 |                     _ => String::from("SOME ERROR HAPPENED!")
    |                     ^
    |
    = note: `#[warn(unreachable_patterns)]` on by default
 
 warning: value assigned to `distance` is never read
-   --> vidyut-chandas/src/identify.rs:117:13
+   --> vidyut-chandas/src/identify.rs:116:13
     |
-117 |     let mut distance: usize = 99999;
+116 |     let mut distance: usize = 99999;
     |             ^^^^^^^^
     |
     = help: maybe it is overwritten before being read?
     = note: `#[warn(unused_assignments)]` on by default
 
 warning: unused variable: `exp_len`
-   --> vidyut-chandas/src/identify.rs:120:21
+   --> vidyut-chandas/src/identify.rs:119:17
     |
-120 |             let mut exp_len = 0;
-    |                     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_exp_len`
+119 |             let exp_len = 0;
+    |                 ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_exp_len`
     |
     = note: `#[warn(unused_variables)]` on by default
 
 warning: variable does not need to be mutable
-  --> vidyut-chandas/src/identify.rs:73:13
+  --> vidyut-chandas/src/identify.rs:72:13
    |
-73 |         let mut distance = levenshtein(&input_scheme, &pattern_scheme);
+72 |         let mut distance = levenshtein(&input_scheme, &pattern_scheme);
    |             ----^^^^^^^^
    |             |
    |             help: remove this `mut`
    |
    = note: `#[warn(unused_mut)]` on by default
 
-warning: variable does not need to be mutable
-   --> vidyut-chandas/src/identify.rs:120:17
-    |
-120 |             let mut exp_len = 0;
-    |                 ----^^^^^^^
-    |                 |
-    |                 help: remove this `mut`
-
 warning: field `comment` is never read
-  --> vidyut-chandas/src/identify.rs:21:5
+  --> vidyut-chandas/src/identify.rs:20:5
    |
-19 | pub struct vrtta_data {
-   |            ---------- field in this struct
-20 |     
-21 |     comment: Vec<String>,
+19 | pub struct VrttaData {
+   |            --------- field in this struct
+20 |     comment: Vec<String>,
    |     ^^^^^^^
    |
-   = note: `vrtta_data` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+   = note: `VrttaData` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
    = note: `#[warn(dead_code)]` on by default
 
 warning: constant `hrasva` should have an upper case name
@@ -97,29 +74,29 @@ warning: function `is_HAL` should have a snake case name
    = note: `#[warn(non_snake_case)]` on by default
 
 warning: function `identify_Sama_Vrtta` should have a snake case name
-  --> vidyut-chandas/src/identify.rs:54:8
+  --> vidyut-chandas/src/identify.rs:53:8
    |
-54 | pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> usize {
+53 | pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> usize {
    |        ^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `identify_sama_vrtta`
 
 warning: variable `gantE` should have a snake case name
-  --> vidyut-chandas/src/identify.rs:61:17
+  --> vidyut-chandas/src/identify.rs:60:17
    |
-61 |         let mut gantE = false;
+60 |         let mut gantE = false;
    |                 ^^^^^ help: convert the identifier to snake case: `gant_e`
 
 warning: function `identify_Ardha_Sama_Vrtta` should have a snake case name
-   --> vidyut-chandas/src/identify.rs:106:8
+   --> vidyut-chandas/src/identify.rs:105:8
     |
-106 | pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> usize {
+105 | pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> usize {
     |        ^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case: `identify_ardha_sama_vrtta`
 
 warning: function `is_Sama_Vrtta` should have a snake case name
-   --> vidyut-chandas/src/identify.rs:196:8
+   --> vidyut-chandas/src/identify.rs:172:8
     |
-196 | pub fn is_Sama_Vrtta(s: &Vec::<Metre>) -> bool {
+172 | pub fn is_Sama_Vrtta(s: &Vec::<Metre>) -> bool {
     |        ^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `is_sama_vrtta`
 
-warning: `vidyut-chandas` (bin "vidyut-chandas") generated 16 warnings
-    Finished dev [unoptimized + debuginfo] target(s) in 0.23s
+warning: `vidyut-chandas` (bin "vidyut-chandas") generated 13 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.42s
      Running `/home/pradyumnamalladi/Desktop/SanskritMetresRust/target/debug/vidyut-chandas`
