@@ -8,6 +8,9 @@ use serde::Deserialize;
 use serde_json;
 use std::fs;
 
+
+extern crate levenshtein;
+use levenshtein::levenshtein;
 use crate::scheme::Metre;
 
 //// Structs that store the metrical data from mishra.json
