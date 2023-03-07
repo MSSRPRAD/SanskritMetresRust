@@ -41,7 +41,13 @@ pub fn read_json () -> VrttaData {
     let path = "./src/data/mishra.json";
     let data = fs::read_to_string(path).expect("Unable to read file");
     let my_data: VrttaData = serde_json::from_str(&data).expect("Unable to parse");
-    //println!("{:#?}", my_data);
+
+    
+    //// Just to get rid of error message I am using my_data.comment
+    //// I am throwing away the value
+    let _ = my_data.comment;
+
+
     return my_data;
 }
 
