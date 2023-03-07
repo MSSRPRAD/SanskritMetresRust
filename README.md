@@ -2,7 +2,7 @@ SanskritMetresRust
 
 [I have added a folder - "vidyut-chandas" to the project. It contains the code for identifying the metre of sanskrit verses.]
 
-Attempt to make rust library for metrical analysis of sanskrit text for the विद्युत् / अम्बुद project. Not ready yet. In preliminary stages. Basically it's hard coded to work for वृत्त based metres with all four पाद-s same and no flexibility for last syllable (गन्ते).
+Doesn't work for mAtrA based metres. Also, closest match is found only from among those having same length (which is not ideal). Also, Anushtup metre is not recognized currently (need to fix that either by hard coding (adding a function) or by adding to the database.
 
 Steps to use:
 1) Navigate to vidyut/vidyut-chandas/
