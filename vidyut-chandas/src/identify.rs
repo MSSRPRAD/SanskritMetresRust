@@ -51,31 +51,28 @@ pub fn read_json () -> vrtta_data {
 /// the first pattern string. So in effect it works only when all 4 padas
 /// have same pattern and गन्ते is ignored.
 
-pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
-    //// hardcoded to take only first pada (if all have equal length)
-    //// no flexibility for गन्ते also
+pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> usize {
+
+    let mut input_scheme: String = String::new();
+    let mut pattern_scheme: String = String::new();
     if a.len() != s.len()/4 {
-        false
+        99999
     } else {
         let mut gantE = false;
         let pada_len = s.len()/4;
         //// Check except for the last syllable
         for i in 0..s.len() {
-            // println!("{:?}", i);
-            let found = s[i].unwrap();
-            let expected = a.chars().nth(i%pada_len).unwrap();
             if (i+1)%pada_len != 0 {
-                if found!=expected {
-                    return false;
-                }
-                // println!("{:?},{:?},{:?}",
-                //     found,
-                //     expected,
-                //     found == expected
-                // );
-            } else {
-                // println!();
+                // println!("{:?}", i);
+                let found = s[i].unwrap();
+                let expected = a.chars().nth(i%pada_len).unwrap();
+                input_scheme += &found.to_string();
+                pattern_scheme += &expected.to_string();
             }
+        }
+        let mut distance = levenshtein(&input_scheme, &pattern_scheme);
+        if distance > 0 {
+            return distance;
         }
         //// Now check if last syllable is laghu when it should be guru
         for i in 0..4 {
@@ -102,11 +99,11 @@ pub fn identify_Sama_Vrtta(a: &String, s: &Vec::<Metre>) -> bool {
             println!("\n\nThe last syllable of one or more lines does not match this metre but some grammatical rules allow this!\n\n");
         }
 
-        return true;
+        0
     }
 }
 
-pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
+pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> usize {
     //// TODO:
     //// Find algorithm to find if pattern if an Ardha Sama Vrtta
     //// Two cases arise: 
@@ -115,61 +112,85 @@ pub fn identify_Ardha_Sama_Vrtta(a: &Vec::<String>, s: &Vec::<Metre>) -> bool {
     ////     if 2nd and 4rd padas of input s are equal to a[0] and a[1]
     //// 2) a.len() = 4
     ////     Here we check if 1st, 2nd, 3rd, 4th padas of input s are equal to a[0], a[1], a[2], a[3]
-    
+    let mut input_scheme: String = String::new();
+    let mut pattern_scheme: String = String::new();
+    let mut distance: usize = 99999;
     match a.len(){
         2 => {
             let mut exp_len = 0;
             if 2*a[0].len()+2*a[1].len() != s.len(){
-                return false;
+                return 99999;
             }
             //// Checking 1st, 3rd padas except for last syllable
             for i in 0..a[0].len()-1 {
-                if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
-                    return false;
-                }
-                if a[0].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()].unwrap() {
-                    return false;
-                }
+                input_scheme += &s[i].unwrap().to_string();
+                pattern_scheme += &a[0].chars().nth(i).unwrap().to_string();
+                // if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
+                //     return false;
+                // }
+                input_scheme += &s[i + a[0].len()+a[1].len()].unwrap().to_string();
+                pattern_scheme += &a[0].chars().nth(i).unwrap().to_string();
+                // if a[0].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()].unwrap() {
+                //     return false;
+                // }
             }
             //// Checking 2nd, 4th padas except for last syllable
             for i in 0..a[1].len()-1 {
-                if a[1].chars().nth(i).unwrap() != s[i+a[0].len()].unwrap() {
-                    return false;
-                }
-                if a[1].chars().nth(i).unwrap() != s[i + 2*a[0].len()+a[1].len()].unwrap() {
-                    return false;
-                }
+                input_scheme += &s[i+a[0].len()].unwrap().to_string();
+                pattern_scheme += &a[1].chars().nth(i).unwrap().to_string();
+                // if a[1].chars().nth(i).unwrap() != s[i+a[0].len()].unwrap() {
+                //     return false;
+                // }
+                input_scheme += &s[i + 2*a[0].len()+a[1].len()].unwrap().to_string();
+                pattern_scheme += &a[1].chars().nth(i).unwrap().to_string();
+                // if a[1].chars().nth(i).unwrap() != s[i + 2*a[0].len()+a[1].len()].unwrap() {
+                //     return false;
+                // }
             }
-            return true;
+            distance = levenshtein(&input_scheme, &pattern_scheme);
+            return distance;
         },
         4 => {
-            for i in 0..a[0].len(){
-                if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
-                    return false;
-                }
+            if a[0].len()+a[1].len()+a[2].len()+a[3].len() != s.len(){
+                 return 99999;
             }
-            for i in 0..a[1].len(){
-                if a[1].chars().nth(i).unwrap() != s[i + a[0].len()].unwrap() {
-                    return false;
-                }
+            for i in 0..a[0].len()-1{
+                input_scheme += &s[i].unwrap().to_string();
+                pattern_scheme += &a[0].chars().nth(i).unwrap().to_string();
+                // if a[0].chars().nth(i).unwrap() != s[i].unwrap() {
+                //     return false;
+                // }
             }
-            for i in 0..a[2].len(){
-                if a[2].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()].unwrap() {
-                    return false;
-                }
+            for i in 0..a[1].len()-1{
+                input_scheme += &s[i + a[0].len()].unwrap().to_string();
+                pattern_scheme += &a[1].chars().nth(i).unwrap().to_string();
+                // if a[1].chars().nth(i).unwrap() != s[i + a[0].len()].unwrap() {
+                //     return false;
+                // }
             }
-            for i in 0..a[3].len(){
-                if a[3].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()+a[2].len()].unwrap() {
-                    return false;
-                }
+            for i in 0..a[2].len()-1{
+                input_scheme += &s[i + a[0].len()+a[1].len()].unwrap().to_string();
+                pattern_scheme += &a[2].chars().nth(i).unwrap().to_string();
+                // if a[2].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()].unwrap() {
+                //     return false;
+                // }
             }
-            return true;
+            for i in 0..a[3].len()-1{
+                input_scheme += &s[i + a[0].len()+a[1].len()+a[2].len()].unwrap().to_string();
+                pattern_scheme += &a[3].chars().nth(i).unwrap().to_string();
+                // if a[3].chars().nth(i).unwrap() != s[i + a[0].len()+a[1].len()+a[2].len()].unwrap() {
+                //     return false;
+                // }
+            }
+            distance = levenshtein(&input_scheme, &pattern_scheme);
+            return distance;
         },
         _ => {
             // println!("Some Error Occured! {:?}", a);
         }
     }
-    return false;
+    println!("SOME ERROR OCCURED! :(");
+    return 99999;
 }
 
 pub fn is_Sama_Vrtta(s: &Vec::<Metre>) -> bool {
@@ -195,12 +216,17 @@ pub fn identify (s: &Vec::<Metre>) -> String {
     }
 
     let vrtta_kosha: vrtta_data = read_json();
+    let mut min_distance = 99999;
+    let mut closest_metre_name = String::new();
+    let mut scheme_of_closest_pattern_ardha = Vec::new();
     for i in 0..vrtta_kosha.metres.len(){
         let ref metre_name = vrtta_kosha.metres[i].name;
         //// Find each pattern as a vector of strings. 
         //// Right now it is being stored as either 
         //// 1) String or 2) List of Strings
+
         let mut vec = Vec::new();
+        
         match &vrtta_kosha.metres[i].pattern {
             
             StringOrList::String(a) => {
@@ -213,24 +239,38 @@ pub fn identify (s: &Vec::<Metre>) -> String {
 
         //// Check even if it is not a sama vrtta because user can make mistake while writing input
         if vec.len() == 1 {
-            //Match this vector of strings with the G-L scheme
-            if identify_Sama_Vrtta( &vec[0] , s ){
-                println!("The input metre is a sama-vrtta.....");
-                return String::from(metre_name);
+            let tmp = identify_Sama_Vrtta(&vec[0], s);
+            if tmp < min_distance {
+                min_distance = tmp;
+                closest_metre_name = String::from(metre_name.to_string());
+            }
+            if min_distance == 0 {
+                println!("The scheme is: ");
             }
         }
-        //// Check for ardha sama vrtta
+        // Check for ardha sama vrtta
         if vec.len() > 1 {
-            // println!("Checking for ardha sama vrtta");
-            if identify_Ardha_Sama_Vrtta(&vec, s){
-                println!("The input metre is an ardha-sama-vrtta.....");
-                println!("{:?}", vec);
-                return String::from(metre_name);
+            let tmp = identify_Ardha_Sama_Vrtta(&vec, s);
+            if tmp < min_distance {
+                min_distance = tmp;
+                closest_metre_name = String::from(metre_name.to_string());
+                scheme_of_closest_pattern_ardha.push(vec);
+                // println!("{:?}, {:?}", min_distance, closest_metre_name);
+                // println!("{:?}", vec);
+            }
+            if min_distance == 0 {
+                println!("Input is an ardha-sama-vrtta.");
+                println!("The scheme is: ");
+                println!("{:?}", scheme_of_closest_pattern_ardha.last());
+                return String::from(closest_metre_name);
             }
         }
 
     }
+
     //// If no Pattern found
+    println!("A similar metre is: {:?}", closest_metre_name);
+    println!("It's levenschtein distance from the input is: {:?}", min_distance);
     String::from("Metre Not Found! Sorry for that :(")
     
 }
