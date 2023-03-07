@@ -5,13 +5,13 @@ use lazy_static::lazy_static;
 
 type Sound = char;
 //hrasva Vowels
-const hrasva: &str = "aiufx";
+const HRASVA: &str = "aiufx";
 //dIrgha Vowels
-const dirgha: &str = "AIUeEoOFX";
+const DIRGHA: &str = "AIUeEoOFX";
 //Consonants
 const HAL: &str = "kKgGNcCjJYwWqQRtTdDnpPbBmyrlvSzsh"; 
 //Anusvara or Visarga
-const others: &str = "MH";
+const OTHERS: &str = "MH";
 
 #[derive(Debug)]
 //// I used enum for learning purposes
@@ -63,19 +63,19 @@ impl Set {
 
 pub fn is_hrasva(c: Sound) -> bool {
     lazy_static! {
-        static ref CHARS: Set = Set::from(hrasva);
+        static ref CHARS: Set = Set::from(HRASVA);
     }
     CHARS.contains(c)
 }
 
 pub fn is_dirgha(c: Sound) -> bool {
     lazy_static! {
-        static ref CHARS: Set = Set::from(dirgha);
+        static ref CHARS: Set = Set::from(DIRGHA);
     }
     CHARS.contains(c)
 }
 
-pub fn is_HAL(c: Sound) -> bool {
+pub fn is_hal(c: Sound) -> bool {
     lazy_static! {
         static ref CHARS: Set = Set::from(HAL);
     }
@@ -84,7 +84,7 @@ pub fn is_HAL(c: Sound) -> bool {
 
 pub fn is_special(c: Sound) -> bool {
     lazy_static! {
-        static ref CHARS: Set = Set::from(others);
+        static ref CHARS: Set = Set::from(OTHERS);
     }
     CHARS.contains(c)
 }
@@ -103,7 +103,7 @@ pub fn find_scheme(raw: &String) -> Vec::<Metre> {
             let next_next: Sound = raw.chars().nth(i+2).unwrap();
             if is_dirgha(curr) {
                 scheme.push(Metre::G);
-            } else if is_hrasva(curr) && is_HAL(next) && is_HAL(next_next){
+            } else if is_hrasva(curr) && is_hal(next) && is_hal(next_next){
                 scheme.push(Metre::G);
             }  else if is_hrasva(curr) && is_special(next){
                 scheme.push(Metre::G);
