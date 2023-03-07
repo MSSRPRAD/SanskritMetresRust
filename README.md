@@ -15,7 +15,17 @@ Example usage:
 Ardha Sama Vrtta Metres are also identified.
 ![image](https://user-images.githubusercontent.com/98510624/223076102-1d1ebb3e-aa4c-4d4d-9714-d4d7bf2be98f.png)
 
-<div align="center">
+Identifies the closest metre (per levenshtein distance) to the input scheme. Ignores the last svara of each leg. Also it considers those schemes having 
+same length as the input (So mistakes like mistyping a vowel will give bad output).
+
+Ex1)
+[Screenshot from 2023-03-07 16-33-25](https://user-images.githubusercontent.com/98510624/223408365-ed02be60-d1d3-46f4-9dad-09f64223e805.png)
+
+
+Ex2)
+![Screenshot from 2023-03-07 16-37-46](https://user-images.githubusercontent.com/98510624/223408497-d6e244a1-80d3-4d04-829b-a38f265571ad.png)
+
+<div align="center">!
 <h1>विद्युत्</h1>
 </div>
 
