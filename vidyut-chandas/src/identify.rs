@@ -245,7 +245,8 @@ pub fn identify (s: &Vec::<Metre>) -> String {
                 closest_metre_name = String::from(metre_name.to_string());
             }
             if min_distance == 0 {
-                println!("The scheme is: ");
+                return String::from(metre_name.to_string());
+                // println!("The scheme is: ");
             }
         }
         // Check for ardha sama vrtta
