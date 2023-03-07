@@ -211,20 +211,16 @@ pub fn identify (s: &Vec::<Metre>) -> String {
             },
         }
 
-        //// If the input verse is a Sama_Vrtta, then check against pattern only if 
-        //// the pattern is also a Sama_Vrtta
-        
-        if is_Sama_Vrtta(s){
-            if vec.len() > 1 {
-                continue
-            } else {
-                //Match this vector of strings with the G-L scheme
-                if identify_Sama_Vrtta( &vec[0] , s ){
-                    println!("The input metre is a sama-vrtta.....");
-                    return String::from(metre_name);
-                }
+        //// Check even if it is not a sama vrtta because user can make mistake while writing input
+        if vec.len() == 1 {
+            //Match this vector of strings with the G-L scheme
+            if identify_Sama_Vrtta( &vec[0] , s ){
+                println!("The input metre is a sama-vrtta.....");
+                return String::from(metre_name);
             }
-        } else {
+        }
+        //// Check for ardha sama vrtta
+        if vec.len() > 1 {
             // println!("Checking for ardha sama vrtta");
             if identify_Ardha_Sama_Vrtta(&vec, s){
                 println!("The input metre is an ardha-sama-vrtta.....");
