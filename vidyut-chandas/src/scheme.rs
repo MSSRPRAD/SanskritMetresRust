@@ -9,7 +9,7 @@ const HRASVA: &str = "aiufx";
 //dIrgha Vowels
 const DIRGHA: &str = "AIUeEoOFX";
 //Consonants
-const HAL: &str = "kKgGNcCjJYwWqQRtTdDnpPbBmyrlvSzsh"; 
+const HAL: &str = "kKgGNcCjJYwWqQRtTdDnpPbBmyrlvSzsh";
 //Anusvara or Visarga
 const OTHERS: &str = "MH";
 
@@ -23,7 +23,7 @@ pub enum Metre {
 
 //// Returns the enum type converted to char
 impl Metre {
-    pub fn unwrap(&self) -> char{
+    pub fn unwrap(&self) -> char {
         match *self {
             Metre::G => 'G',
             Metre::L => 'L',
@@ -89,34 +89,33 @@ pub fn is_special(c: Sound) -> bool {
     CHARS.contains(c)
 }
 
-
 //// Returning a vector of enums that holds the guru-laghu scheme of the input
 /// The only reason I used enums is because I was learning them
 /// May need to change?
-pub fn find_scheme(raw: &String) -> Vec::<Metre> {
+pub fn find_scheme(raw: &String) -> Vec<Metre> {
     let mut scheme = Vec::<Metre>::new();
     for i in 0..raw.len() {
         let curr: Sound = raw.chars().nth(i).unwrap();
         //Other than from second last char
-        if i<=raw.len()-3 {
-            let next: Sound = raw.chars().nth(i+1).unwrap();
-            let next_next: Sound = raw.chars().nth(i+2).unwrap();
+        if i <= raw.len() - 3 {
+            let next: Sound = raw.chars().nth(i + 1).unwrap();
+            let next_next: Sound = raw.chars().nth(i + 2).unwrap();
             if is_dirgha(curr) {
                 scheme.push(Metre::G);
-            } else if is_hrasva(curr) && is_hal(next) && is_hal(next_next){
+            } else if is_hrasva(curr) && is_hal(next) && is_hal(next_next) {
                 scheme.push(Metre::G);
-            }  else if is_hrasva(curr) && is_special(next){
+            } else if is_hrasva(curr) && is_special(next) {
                 scheme.push(Metre::G);
-            } else if is_hrasva(curr){
+            } else if is_hrasva(curr) {
                 scheme.push(Metre::L);
             }
-        } else if i == raw.len()-2{
-            let next: Sound = raw.chars().nth(i+1).unwrap();
+        } else if i == raw.len() - 2 {
+            let next: Sound = raw.chars().nth(i + 1).unwrap();
             //From second last character to last character it is Laghu only if
             //Dirgha vowel and followed by anusvara/visarga.
-            if is_dirgha(curr){
+            if is_dirgha(curr) {
                 scheme.push(Metre::G);
-            } else if is_hrasva(curr) && is_special(next){
+            } else if is_hrasva(curr) && is_special(next) {
                 scheme.push(Metre::G);
             } else if is_hrasva(curr) {
                 scheme.push(Metre::L);
@@ -124,11 +123,10 @@ pub fn find_scheme(raw: &String) -> Vec::<Metre> {
         } else {
             if is_dirgha(curr) {
                 scheme.push(Metre::G);
-            } else if is_hrasva(curr){
+            } else if is_hrasva(curr) {
                 scheme.push(Metre::L);
             }
         }
-        
     }
 
     scheme

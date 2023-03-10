@@ -1,18 +1,18 @@
 //// Main Function
-mod process;
 mod format;
-mod scheme;
 mod identify;
+mod process;
+mod scheme;
 
-use crate::scheme::*;
 use crate::format::*;
+use crate::scheme::*;
 
-fn main(){
+fn main() {
     //Input Verse in slp1 encoding
-    let mut verse: String = String::from("nayugaM sAkArayugalaM cA
-    BavatI caraRaM tftIyakam .
-    taduditamurumatiBirlalItaM
-    yadDi Sezamasya Kalu pUrvatUlyakam .");
+    let mut verse: String = String::from(
+        "vAgarTAv iv saMpfktO vAgarTapratipattaye .
+jagataH pitarO vande pArvatIparmeSvarO ..",
+    );
 
     //Print the input verse
     println!("\nInput Verse:\n{:?}\n\n", verse);
@@ -24,20 +24,21 @@ fn main(){
     println!("Processed Verse:\n{:?}\n", verse);
 
     //Find the scheme of the verse (Matra based functionality not implemented yet)
-    let s: Vec::<Metre> = find_scheme(&verse);
+    let s: Vec<Metre> = find_scheme(&verse);
 
     //Print the scheme of the verse
     print!("Scheme:\n");
     print_scheme(&s);
 
     //Print the formatted verse (Only for those whose four padas have equivalent length)
-    let verse_formatted = format_verse(&verse,&s );
+    let verse_formatted = format_verse(&verse, &s);
 
-    
     //Print the formatted verse
     println!("\n\nOutput Verse:\n{}\n", verse_formatted);
 
     //Read the JSON File and print the metre (if found)
-    println!("Metre Name:\n{}",identify::identify(&s));
-    
+    println!("Metre Name:\n{}", identify::identify(&s));
+
+    println!("\n\n");
+
 }

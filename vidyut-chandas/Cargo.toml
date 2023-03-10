@@ -8,7 +8,11 @@ edition = "2021"
 [dependencies]
 strum = { version = "0.24.1", features = ["derive"] }
 lazy_static = "1.4.0"
-serde = {version = "1.0.152", features = ["derive"]}
-tokio = {version = "1", features = ["full"]}
-serde_json = {version = "1.0.93"}
+serde = { version = "1.0.152", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+serde_json = { version = "1.0.93" }
 levenshtein = "1.0.5"
+itertools = "0.10.5"
+
+[profile.release]
+debug = 1
