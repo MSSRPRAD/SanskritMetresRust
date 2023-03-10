@@ -60,11 +60,11 @@ pub fn identify_sama_vrtta(a: &String, s: &Vec<Metre>) -> usize {
     let mut input_scheme: String = String::new();
     let mut pattern_scheme: String = String::new();
     if a.len() != s.len() / 4 {
-        for i in 0..4{
+        for i in 0..4 {
             _ = i;
             input_scheme += &a;
         }
-        for i in 0..s.len(){
+        for i in 0..s.len() {
             pattern_scheme += &s[i].unwrap().to_string();
         }
 
@@ -134,7 +134,7 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                 pattern_scheme += &a[1].to_string();
                 pattern_scheme += &a[0].to_string();
                 pattern_scheme += &a[1].to_string();
-                for t in 0..s.len(){
+                for t in 0..s.len() {
                     input_scheme += &s[t].unwrap().to_string();
                 }
                 distance = levenshtein(&pattern_scheme, &input_scheme);
@@ -155,7 +155,6 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                 } else {
                     pattern_scheme += &s[i + a[0].len() + a[1].len()].unwrap().to_string();
                 }
-                
             }
             //// Checking 2nd, 4th padas except for last syllable
             for i in 0..a[1].len() - 1 {
@@ -165,14 +164,13 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                 } else {
                     pattern_scheme += &s[i + a[0].len()].unwrap().to_string();
                 }
-                
+
                 input_scheme += &s[i + 2 * a[0].len() + a[1].len()].unwrap().to_string();
                 if a[1].chars().nth(i).unwrap() != 'X' {
                     pattern_scheme += &a[1].chars().nth(i).unwrap().to_string();
                 } else {
                     pattern_scheme += &s[i + 2 * a[0].len() + a[1].len()].unwrap().to_string();
                 }
-                
             }
             distance = levenshtein(&input_scheme, &pattern_scheme);
             return distance;
@@ -183,15 +181,18 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                 pattern_scheme += &a[1].to_string();
                 pattern_scheme += &a[2].to_string();
                 pattern_scheme += &a[3].to_string();
-                for t in 0..s.len(){
+                for t in 0..s.len() {
                     input_scheme += &s[t].unwrap().to_string();
                 }
-                for t in 0..pattern_scheme.len(){
+                for t in 0..pattern_scheme.len() {
                     if pattern_scheme.chars().nth(t).unwrap() == 'X' {
                         if t < s.len() {
-                            pattern_scheme.replace_range(t..t+1, &input_scheme.chars().nth(t).unwrap().to_string());
+                            pattern_scheme.replace_range(
+                                t..t + 1,
+                                &input_scheme.chars().nth(t).unwrap().to_string(),
+                            );
                         } else {
-                            pattern_scheme.replace_range(t..t+1, "G");
+                            pattern_scheme.replace_range(t..t + 1, "G");
                         }
                     }
                 }
@@ -213,7 +214,6 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                 } else {
                     pattern_scheme += &s[i + a[0].len()].unwrap().to_string();
                 }
-                
             }
             for i in 0..a[2].len() - 1 {
                 input_scheme += &s[i + a[0].len() + a[1].len()].unwrap().to_string();
@@ -222,7 +222,6 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                 } else {
                     pattern_scheme += &s[i + a[0].len() + a[1].len()].unwrap().to_string();
                 }
-                
             }
             for i in 0..a[3].len() - 1 {
                 input_scheme += &s[i + a[0].len() + a[1].len() + a[2].len()]
@@ -232,10 +231,9 @@ pub fn identify_ardha_sama_vrtta(a: &Vec<String>, s: &Vec<Metre>) -> usize {
                     pattern_scheme += &a[3].chars().nth(i).unwrap().to_string();
                 } else {
                     pattern_scheme += &s[i + a[0].len() + a[1].len() + a[2].len()]
-                    .unwrap()
-                    .to_string();
+                        .unwrap()
+                        .to_string();
                 }
-                
             }
             distance = levenshtein(&input_scheme, &pattern_scheme);
             return distance;
@@ -291,7 +289,7 @@ pub fn identify(s: &Vec<Metre>) -> String {
                 vec = b.to_vec();
             }
         }
-        let padas = vec.len(); 
+        let padas = vec.len();
         //// Check even if it is not a sama vrtta because user can make mistake while writing input
         if padas == 1 {
             let tmp = identify_sama_vrtta(&vec[0], s);
@@ -319,7 +317,7 @@ pub fn identify(s: &Vec<Metre>) -> String {
                 closest_is_sama_vrtta = false;
             }
             if min_distance == 0 {
-                if closest_metre_name != "anushtubh"{
+                if closest_metre_name != "anushtubh" {
                     println!("Input is an ardha-sama-vrtta.");
                 }
                 println!("The scheme is: ");
@@ -336,11 +334,11 @@ pub fn identify(s: &Vec<Metre>) -> String {
         min_distance
     );
     println!("The scheme is: ");
-    if closest_is_sama_vrtta{
+    if closest_is_sama_vrtta {
         println!("{:?}", scheme_of_closest_pattern_sama);
     } else {
         println!("{:?}", scheme_of_closest_pattern_ardha);
     }
-                
+
     String::from("Metre Not Found! Sorry for that :(")
 }

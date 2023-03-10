@@ -11,7 +11,7 @@ fn main() {
     //Input Verse in slp1 encoding
     let mut verse: String = String::from(
         "vAgarTAv iv saMpfktO vAgarTapratipattaye .
-jagataH pitarO vande pArvatIparmeSvarO ..",
+jagataH tarO vande pArvatIparmeSvarO ..",
     );
 
     //Print the input verse
@@ -40,5 +40,4 @@ jagataH pitarO vande pArvatIparmeSvarO ..",
     println!("Metre Name:\n{}", identify::identify(&s));
 
     println!("\n\n");
-
 }
